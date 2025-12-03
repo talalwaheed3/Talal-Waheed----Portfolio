@@ -1,4 +1,11 @@
-const TitleHeader = ({ title, sub }) => {
+import type React from "react";
+
+interface TitleProps {
+  title: string;
+  sub: string;
+}
+
+const TitleHeader: React.FC<TitleProps> = ({ title, sub }) => {
   return (
     <div className="flex flex-col items-center gap-5">
       <div className="hero-badge">

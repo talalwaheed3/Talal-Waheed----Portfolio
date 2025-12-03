@@ -1,5 +1,5 @@
 import { socialImgs } from "../const";
-import GitHubIcon from "../icons/github.svg?react";
+// import GitHubIcon from "../icons/github.svg";
 
 const Footer = () => {
   return (
@@ -12,7 +12,8 @@ const Footer = () => {
           {socialImgs.map((img) => (
             <a className="icon" target="_blank" href={img.url} key={img.url}>
               {img.name === "github" ? (
-                <GitHubIcon className="text-white fill-white" />
+                <img src={img.imgPath} alt={img.name} />
+                // <GitHubIcon className="text-white fill-white" />
               ) : (
                 <img src={img.imgPath} alt={img.name} />
               )}

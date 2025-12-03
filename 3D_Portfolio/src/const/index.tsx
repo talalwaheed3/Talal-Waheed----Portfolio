@@ -82,32 +82,52 @@ const techStackImgs = [
   // },
 ];
 
-const techStackIcons = [
+export type TechModel =
+  | {
+      type: "gltf";
+      name: string;
+      modelPath: string;
+      scale?: number;
+      rotation?: [number, number, number];
+    }
+  | {
+      type: "image";
+      name: string;
+      imgPath: string;
+    };
+
+
+const techStackIcons: TechModel[] = [
   {
+    type: "gltf",
     name: "React Developer",
     modelPath: "/models/react_logo-transformed.glb",
     scale: 1,
     rotation: [0, 0, 0],
   },
   {
+    type: "gltf",
     name: "Python Developer",
     modelPath: "/models/python-transformed.glb",
     scale: 0.8,
     rotation: [0, 0, 0],
   },
   {
+    type: "gltf",
     name: "Backend Developer",
     modelPath: "/models/node-transformed.glb",
     scale: 5,
     rotation: [0, -Math.PI / 2, 0],
   },
   {
+    type: "gltf",
     name: "Interactive Developer",
     modelPath: "/models/three.js-transformed.glb",
     scale: 0.05,
     rotation: [0, 0, 0],
   },
   {
+    type: "image",
     name: "Angular Developer",
     imgPath: "/images/logos/angularjs-480.png",
   },

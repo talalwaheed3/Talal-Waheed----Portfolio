@@ -53,7 +53,7 @@ export default function Room(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF(
     "/models/optimized-room.glb"
   ) as unknown as GLTFResult;
-  const screensRef = useRef();
+  const screensRef = useRef<THREE.Mesh>(null!);
   const matcapTexture = useTexture("/images/textures/mat1.png");
 
   const curtainMaterial = new THREE.MeshPhongMaterial({
@@ -88,7 +88,7 @@ export default function Room(props: JSX.IntrinsicElements["group"]) {
     <group {...props} dispose={null}>
       <EffectComposer>
         <SelectiveBloom
-          selection={screensRef ? screensRef : []}
+          selection={screensRef}
           intensity={1.5} // Strength of the bloom
           luminanceThreshold={0.2} // Minimum luminance needed
           luminanceSmoothing={0.9} // Smooth transition

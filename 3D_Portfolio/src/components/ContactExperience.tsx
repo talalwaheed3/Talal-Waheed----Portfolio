@@ -1,7 +1,6 @@
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Computer } from "./Models/Computer-optimized";
-import { MeshStandardMaterial } from "three";
 
 const ContactExperience = () => {
   return (

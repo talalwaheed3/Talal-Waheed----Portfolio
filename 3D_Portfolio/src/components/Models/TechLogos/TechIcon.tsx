@@ -1,33 +1,18 @@
-// import { Environment, Float, OrbitControls, useGLTF } from "@react-three/drei"
+// import { Environment, Float, OrbitControls, useGLTF } from "@react-three/drei";
 // import { Canvas } from "@react-three/fiber";
 // import { useEffect } from "react";
-// import * as THREE from 'three'
+// import * as THREE from "three";
 
-// interface TechModel {
-//   name: string;
-//   modelPath: string;
-// }
-
-// // interface GLTFType {
-// //   scene: THREE.Group;
-// // }
-
-// interface TechIconProps {
-//   model: TechModel;
-// }
-
-// const TechIcon: React.FC<TechIconProps> = ({ model }) => {
-//   // Strong typing through generics instead of importing GLTF
-//   const scene = useGLTF<string>(model.modelPath);
+// const TechIcon = ({ model }) => {
+//   const scene = useGLTF(model.modelPath);
 
 //   useEffect(() => {
-//     if (model.name === "Interative Developer") {
+//     if (model.name === "Interactive Developer") {
 //       scene.scene.traverse((child) => {
-//         // Safe type narrowing
-//         if (child.isMesh && child.name === "Object_5") {
-//           child.material = new THREE.MeshStandardMaterial({
-//             color: "white",
-//           });
+//         if (child.isMesh) {
+//           if (child.name === "Object_5") {
+//             child.material = new THREE.MeshStandardMaterial({ color: "white" });
+//           }
 //         }
 //       });
 //     }
@@ -41,34 +26,59 @@
 
 //       <Float speed={5.5} rotationIntensity={0.5} floatIntensity={0.9}>
 //         <group scale={model.scale} rotation={model.rotation}>
-//           <primitive object={scene.scene}/>
+//           <primitive object={scene.scene} />
 //         </group>
 //       </Float>
 //     </Canvas>
-//   )
-// }
+//   );
+// };
 
-// export default TechIcon
+// export default TechIcon;
+
 
 import { Environment, Float, OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useEffect } from "react";
 import * as THREE from "three";
 
-const TechIcon = ({ model }) => {
-  const scene = useGLTF(model.modelPath);
+// ----------------------
+// Types
+// ----------------------
+interface TechModel {
+  name: string;
+  modelPath: string;
+  scale?: number;
+  rotation?: [number, number, number];
+}
+
+interface TechIconProps {
+  model: TechModel;
+}
+
+interface GLTFResult extends THREE.Object3D {
+  scene: THREE.Group;
+}
+
+// ----------------------
+// Component
+// ----------------------
+const TechIcon: React.FC<TechIconProps> = ({ model }) => {
+  const scene = useGLTF(model.modelPath) as unknown as GLTFResult;
 
   useEffect(() => {
     if (model.name === "Interactive Developer") {
       scene.scene.traverse((child) => {
-        if (child.isMesh) {
+        if ((child as THREE.Mesh).isMesh) {
           if (child.name === "Object_5") {
-            child.material = new THREE.MeshStandardMaterial({ color: "white" });
+            (child as THREE.Mesh).material = new THREE.MeshStandardMaterial({
+              color: "white",
+            });
           }
         }
       });
     }
-  }, [scene]);
+  }, [scene, model.name]);
+
   return (
     <Canvas>
       <ambientLight intensity={0.3} />
@@ -86,3 +96,6 @@ const TechIcon = ({ model }) => {
 };
 
 export default TechIcon;
+
+// Drei GLTF loader needs this:
+useGLTF.preload("/path/to/model.glb");

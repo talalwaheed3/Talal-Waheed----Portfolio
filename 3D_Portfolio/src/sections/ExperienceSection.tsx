@@ -10,8 +10,9 @@ gsap.registerPlugin(ScrollTrigger);
 const ExperienceSection = () => {
   useGSAP(() => {
     gsap.utils.toArray(".timeline-card").forEach((card) => {
+      const element = card as HTMLDivElement;
       gsap.from(
-        card,
+        element,
         {
           xPercent: -100,
           opacity: 0,
@@ -19,7 +20,7 @@ const ExperienceSection = () => {
           duration: 1,
           ease: "power2.inOut",
           scrollTrigger: {
-            trigger: card,
+            trigger: element,
             start: 'top 80%'
           }
         }
@@ -42,15 +43,16 @@ const ExperienceSection = () => {
     })
 
     gsap.utils.toArray(".expText").forEach((text) => {
+      const element = text as HTMLElement;
       gsap.from(
-        text,
+        element,
         {
           xPercent: 0,
           opacity: 0,
           duration: 1,
           ease: "power2.inOut",
           scrollTrigger: {
-            trigger: text,
+            trigger: element,
             start: 'top 60%'
           }
         }
@@ -94,7 +96,7 @@ const ExperienceSection = () => {
                       <div>
                         <h1 className="font-semibold text-3xl">{card.title}</h1>
                         <p className="my-5 text-white-50">📅 {card.date}</p>
-                        <p className="text-[#839cb5] italic">Responsibilites</p>
+                        <p className="text-blue-50 italic">Responsibilites</p>
                         <ul className="list-disc mt-5 flex flex-col gap-5 text-white-50">
                           {card.responsibilities.map((responsibility) => (
                             <li key={responsibility} className="text-lg">

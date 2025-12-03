@@ -1,7 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import TechIcon from "../components/Models/TechLogos/TechIcon";
 import TitleHeader from "../components/TitleHeader";
-import { techStackIcons, techStackImgs } from "../const";
+import { techStackIcons } from "../const";
 import { gsap } from "gsap";
 
 const TechStack = () => {
@@ -43,7 +43,7 @@ const TechStack = () => {
               <div className="tech-card-animated-bg" />
               <div className="tech-card-content">
                 <div className="tech-icon-wrapper">
-                  {icon.name === 'Angular Developer' ? (
+                  {icon.type === "image" ? (
                     <img src={icon.imgPath} />
                   ) : (
                     <TechIcon model={icon} />
